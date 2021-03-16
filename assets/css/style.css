@@ -1,62 +1,67 @@
-* {
+*, *::before, *::after {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    font-family: Arial, Helvetica, sans-serif
 }
 
 body {
-    background-color: #ffffff;
+    height: 90vh;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-    height:100vh;
-    align-items: center;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    flex-direction: column;
 }
 
 .container {
-    width: 75vw;
-    height: 70vh;
+    margin-top: 40px;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
-    background-color: pink;
+    align-items: center;
 }
 
-.btn {
-    margin: 5px;
-    padding: 5px 10px;
-    border: none;
-    outline: none;
-    display: inline-block;
-    border-radius: 5px;
-    font-size: 1.3rem;
-    background-color: rgb(116, 36, 192);
-    color: #ffffff;
-    font-weight: bold;
-    width: max-content;
-    height: max-content;
-    box-shadow: 0 3px grey;
+.nav {
+    display: flex;
+    justify-content: space-between;
+    color: purple;
 }
 
-.btn:hover {
-    box-shadow: 0 2px grey;
-    top: -1px;
-}
-.btn:active {
-    box-shadow: 0 0 grey;
-    top: -3px;
+.nav a {
+    text-decoration: none;
 }
 
 .heading {
-    font-weight: bold;
-    width: max-content;
+    display: flex;
+    justify-content: center;
 }
 
-.question {
-    width: max-content;
+.text-content {
+    width: 80%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
 }
+
+.text-content button {
+    margin: 0 auto;
+}
+
+.btn {
+    width: fit-content;
+    height: 35px;
+    border: 2px solid purple;
+    border-radius: 10px;
+    background-color: rebeccapurple;
+    opacity: 0.85;
+    color: white;
+    font-size: 1rem;
+    box-shadow: 0 3px 3px rebeccapurple;
+    outline: none;
+}
+
+.btn:hover {
+    opacity: 1;
+}
+
+.btn:active {
+    transform: translateY(2px);
+}
+
