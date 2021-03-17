@@ -23,18 +23,27 @@ console.log(timer);
 var pEl = document.querySelector("#text-content");
 var buttonGroup = document.querySelector("#button-group");
 var confirmBtn = document.querySelector("#confirmBtn");
+var flashContent = document.querySelector("#text-flash-container");
 
-confirmBtn.addEventListener("click", startQuiz);
+
 
 function startQuiz() {
+    timer = 60;
     startTimer();
-    headingEl.innerHTML = "Testing";
-    pEl.innerHTML = "";
-    confirmBtn.parentNode.removeChild(confirmBtn);
+    headingEl.classList.add("hide");
+    pEl.classList.add("hide");
+    confirmBtn.classList.add("hide");
+
+    var questionIndex = 0;
+    // for (let i=0; i<questions.length; i++) {
+    //     headingEl.textContent = questions[i].q;
+    //     console.log(headingEl.textContent);
+    // }
+
 }
 
+// timer logic
 function startTimer() {
-    timer = 60;
     var time = setInterval(function() {
         timerEl.textContent = timer;
         timer--;
@@ -44,3 +53,6 @@ function startTimer() {
         }
     }, 1000);
 }
+
+// starts quiz when the 'Start Quiz' Button is clicked
+confirmBtn.addEventListener("click", startQuiz);
