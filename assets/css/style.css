@@ -4,9 +4,10 @@
 }
 
 body {
-    height: 90vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     font-size: 1.25rem;
     margin: 0;
     padding: 0;
@@ -35,6 +36,10 @@ body {
 .heading {
     display: flex;
     justify-content: center;
+}
+
+.question-style {
+    text-align: left;
 }
 
 .text-content {

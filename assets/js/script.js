@@ -19,7 +19,6 @@ var timer = 0;
 var headingEl = document.querySelector("#heading-h1");
 console.log(headingEl.textContent);
 var timerEl = document.querySelector("#timer");
-console.log(timer);
 var pEl = document.querySelector("#text-content");
 var buttonGroup = document.querySelector("#button-group");
 var confirmBtn = document.querySelector("#confirmBtn");
@@ -28,13 +27,15 @@ var flashContent = document.querySelector("#text-flash-container");
 
 
 function startQuiz() {
-    timer = 60;
+    timer = 11;
     startTimer();
-    headingEl.classList.add("hide");
     pEl.classList.add("hide");
     confirmBtn.classList.add("hide");
 
     var questionIndex = 0;
+    headingEl.classList.add("question-style");
+    headingEl.textContent = questions[questionIndex].q;
+
     // for (let i=0; i<questions.length; i++) {
     //     headingEl.textContent = questions[i].q;
     //     console.log(headingEl.textContent);
@@ -45,10 +46,11 @@ function startQuiz() {
 // timer logic
 function startTimer() {
     var time = setInterval(function() {
-        timerEl.textContent = timer;
         timer--;
+        timerEl.textContent = timer;
+        console.log(timer);
 
-        if(timer === 0) {
+        if(timer <= 0) {
             clearInterval(time);
         }
     }, 1000);
