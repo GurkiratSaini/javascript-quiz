@@ -47,6 +47,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: center;
 }
 
 .text-content button {
@@ -74,10 +75,6 @@ body {
     transform: translateY(2px);
 }
 
-.hide {
-    display: none;
-}
-
 .btn-group {
     display: flex;
     flex-direction: column;
@@ -85,8 +82,40 @@ body {
     justify-content: space-between;
 }
 
+.hide {
+    display: none;
+}
+
 .text-flash-container {
     width: 100%;
-    border-top: 1px solid black;
-    opacity: 0.5;
+    border-top: 1px solid rgba(0,0,0,0.4);
+    opacity: 0.4;
+    margin-top: 10px;
+}
+
+.text-flash-container p {
+    margin: 5px;
+}
+
+.ansBtn {
+    box-shadow: none;
+}
+
+#finalScore {
+    margin: 0 auto;
+}
+
+.textField {
+    width: 200px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 10px;
+    outline: none;
+    margin: 0 auto;
+}
+
+.nameDisplay {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }

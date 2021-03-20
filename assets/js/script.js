@@ -15,32 +15,34 @@ var questions = [
      a: ["ans1", "ans2", "ans3", "ans4"],
      correctAns: "ans1"}
 ];
-var timer = 0;
+var timer = 70;
 var headingEl = document.querySelector("#heading-h1");
-console.log(headingEl.textContent);
 var timerEl = document.querySelector("#timer");
-var pEl = document.querySelector("#text-content");
-var buttonGroup = document.querySelector("#button-group");
-var confirmBtn = document.querySelector("#confirmBtn");
-var flashContent = document.querySelector("#text-flash-container");
+var textContent = document.querySelector("#text-content");
+var finalScoreText = document.querySelector("#finalScore");
+var buttonGroup = document.querySelector("#btn-group");
+var startQuizBtn = document.querySelector("#startQuiz");
+var flashContent = document.querySelector(".text-flash-container");
+var answerGroup = document.querySelectorAll("button.ansBtn");
+var answer1 = document.querySelector("#answer1");
+var answer2 = document.querySelector("#answer2");
+var answer3 = document.querySelector("#answer3");
+var answer4 = document.querySelector("#answer4");
+var textField = document.querySelector("#nameField");
+var questionIndex = 0;
 
-
+var scores = {};
 
 function startQuiz() {
-    timer = 11;
     startTimer();
-    pEl.classList.add("hide");
-    confirmBtn.classList.add("hide");
+    textContent.classList.add("hide");
+    startQuizBtn.classList.add("hide");
 
-    var questionIndex = 0;
     headingEl.classList.add("question-style");
-    headingEl.textContent = questions[questionIndex].q;
-
-    // for (let i=0; i<questions.length; i++) {
-    //     headingEl.textContent = questions[i].q;
-    //     console.log(headingEl.textContent);
-    // }
-
+    buttonGroup.classList.remove("hide");
+    
+    setQuestion(questionIndex);
+    console.log(`Question Index is ${questionIndex}`);
 }
 
 // timer logic
@@ -50,11 +52,59 @@ function startTimer() {
         timerEl.textContent = timer;
         console.log(timer);
 
-        if(timer <= 0) {
+        if(timer <= 0 || questionIndex === questions.length) {
             clearInterval(time);
+            headingEl.textContent = "Game Over";
+            buttonGroup.classList.add("hide");
+            flashContent.classList.add("hide");
+            finalScoreText.classList.remove("hide");
+            textField.classList.remove("hide");
+            finalScoreText.textContent = `Your Score: ${timer}`;
         }
     }, 1000);
 }
 
+function setQuestion(index) {
+    if (index < questions.length) {
+        headingEl.textContent = questions[index].q;
+        answer1.textContent = questions[index].a[0];
+        answer2.textContent = questions[index].a[1];
+        answer3.textContent = questions[index].a[2];
+        answer4.textContent = questions[index].a[3];
+    }
+}
+
+function checkAnswer(event){
+    
+    flashContent.classList.remove("hide");
+    var pEl = document.createElement("p");
+    flashContent.appendChild(pEl);
+    setTimeout(function() {
+        pEl.classList.add("hide");
+    }, 1000);
+
+    if(questions[questionIndex].correctAns === event.target.textContent) {
+        pEl.textContent = "Correct!";
+    }
+    else {
+        timer = timer - 10;
+        pEl.textContent = "Wrong!";
+    }
+
+    if(questionIndex < questions.length) {
+        questionIndex++;
+    }
+    setQuestion(questionIndex);
+}
+
+function saveScore() {
+    localStorage.setItem("score", JSON.stringify());
+}
+
+
 // starts quiz when the 'Start Quiz' Button is clicked
-confirmBtn.addEventListener("click", startQuiz);
+startQuizBtn.addEventListener("click", startQuiz);
+
+answerGroup.forEach(element => {
+    element.addEventListener("click", checkAnswer);
+});
