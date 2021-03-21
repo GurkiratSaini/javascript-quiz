@@ -29,9 +29,12 @@ var answer2 = document.querySelector("#answer2");
 var answer3 = document.querySelector("#answer3");
 var answer4 = document.querySelector("#answer4");
 var textField = document.querySelector("#nameField");
+var nameDisplay = document.querySelector(".nameDisplay");
+var nameSubmitBtn = document.querySelector("#nameSubmitBtn");
 var questionIndex = 0;
+var finalScore = 0;
 
-var scores = {};
+var scores = [];
 
 function startQuiz() {
     startTimer();
@@ -58,8 +61,10 @@ function startTimer() {
             buttonGroup.classList.add("hide");
             flashContent.classList.add("hide");
             finalScoreText.classList.remove("hide");
-            textField.classList.remove("hide");
-            finalScoreText.textContent = `Your Score: ${timer}`;
+            nameDisplay.classList.remove("hide");
+            nameSubmitBtn.classList.remove("hide");
+            finalScore = timer;
+            finalScoreText.textContent = `Your Score: ${finalScore}`;
         }
     }, 1000);
 }
@@ -97,8 +102,22 @@ function checkAnswer(event){
     setQuestion(questionIndex);
 }
 
-function saveScore() {
-    localStorage.setItem("score", JSON.stringify());
+function saveScore(event) {
+    var playerInitials = textField.value.toUpperCase();
+    console.log(playerInitials);
+    scores.push({initials: playerInitials,score: finalScore});
+    console.log(scores);
+    localStorage.setItem("scores", JSON.stringify(scores));
+    displayHighScores();
+}
+
+function displayHighScores(){
+    nameSubmitBtn.classList.add("hide");
+    finalScoreText.classList.add("hide");
+    nameDisplay.classList.add("hide");
+    textField.classList.add("hide");
+    headingEl.textContent = "High Scores";
+    
 }
 
 
@@ -108,3 +127,5 @@ startQuizBtn.addEventListener("click", startQuiz);
 answerGroup.forEach(element => {
     element.addEventListener("click", checkAnswer);
 });
+
+nameSubmitBtn.addEventListener("click", saveScore);
