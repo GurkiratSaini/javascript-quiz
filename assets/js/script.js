@@ -31,21 +31,30 @@ var answer4 = document.querySelector("#answer4");
 var textField = document.querySelector("#nameField");
 var nameDisplay = document.querySelector(".nameDisplay");
 var nameSubmitBtn = document.querySelector("#nameSubmitBtn");
+var highscoresLink = document.querySelector("#highscoresLink");
+var highscoresTable = document.querySelector("#highscoresTable");
+var highscoresDiv = document.querySelector(".table");
 var questionIndex = 0;
 var finalScore = 0;
+var playerInitials = "";
+
+console.log(highscoresTable + " HST");
 
 var scores = [];
+
+if (localStorage.getItem("scores")){
+    scores = JSON.parse(localStorage.getItem("scores"));
+    console.log(scores);
+}
+
 
 function startQuiz() {
     startTimer();
     textContent.classList.add("hide");
     startQuizBtn.classList.add("hide");
-
     headingEl.classList.add("question-style");
     buttonGroup.classList.remove("hide");
-    
     setQuestion(questionIndex);
-    console.log(`Question Index is ${questionIndex}`);
 }
 
 // timer logic
@@ -103,21 +112,66 @@ function checkAnswer(event){
 }
 
 function saveScore(event) {
-    var playerInitials = textField.value.toUpperCase();
+    playerInitials = textField.value.toUpperCase();
     console.log(playerInitials);
     scores.push({initials: playerInitials,score: finalScore});
     console.log(scores);
     localStorage.setItem("scores", JSON.stringify(scores));
+    // displayHighScores(playerInitials);
     displayHighScores();
 }
 
-function displayHighScores(){
-    nameSubmitBtn.classList.add("hide");
-    finalScoreText.classList.add("hide");
-    nameDisplay.classList.add("hide");
-    textField.classList.add("hide");
+// function displayHighScores(playerInitials){
+   function displayHighScores(){
+    // nameSubmitBtn.classList.add("hide");
+    // finalScoreText.classList.add("hide");
+    // nameDisplay.classList.add("hide");
+    // textField.classList.add("hide");
+    textContent.classList.add("hide");
+    startQuizBtn.classList.add("hide");
     headingEl.textContent = "High Scores";
-    
+    highscoresDiv.classList.remove("hide");
+    highScoreTableGenerate();
+    // highScoreTableGenerate(playerInitials);
+}
+
+// function highScoreTableGenerate(playerInitials) {
+//    function highScoreTableGenerate() {
+//     var trEl = document.createElement("tr");
+//     var tdNameEl = document.createElement("td");
+//     var tdScoreEl = document.createElement("td");
+//     tdNameEl.textContent = playerInitials + "";
+//     tdScoreEl.textContent = finalScore + "";
+//     trEl.appendChild(tdNameEl);
+//     trEl.appendChild(tdScoreEl + "");
+//     highscoresTable.appendChild(trEl);
+// }
+
+function highScoreTableGenerate(){
+    for(let i=0; i<scores.length; i++){
+        // var trEl = document.createElement("tr");
+        // var tdNameEl = document.createElement("td");
+        // var tdScoreEl = document.createElement("td");
+        // tdNameEl.innerHTML = scores[i].initials;
+        // console.log(tdNameEl);
+        // tdScoreEl.innerHTML = scores[i].score;
+        // console.log(tdScoreEl);
+        // trEl.appendChild(tdNameEl);
+        // trEl.appendChild(tdScoreEl);
+        // highscoresTable.appendChild(trEl);
+        // console.log(highscoresTable);
+
+        var y = i++;
+        var table = 
+        row = highscoresTable.insertRow(y);
+        var cell1 = row.insertCell(i);
+        var cell2 = row.insertCell(y);
+
+        cell1.innerHTML = scores[i].initials;
+        cell2.innerHTML = scores[i].score;
+
+        console.log(`HST is ${highscoresTable}`);
+    }
 }
 
 
@@ -129,3 +183,4 @@ answerGroup.forEach(element => {
 });
 
 nameSubmitBtn.addEventListener("click", saveScore);
+highscoresLink.addEventListener("click", displayHighScores);

@@ -9,12 +9,22 @@
 </head>
 <body>
     <div class="nav">
-        <a href="/"><p>View Highscores</p></a>
+        <button type="button" class="btn highScoreBtn" id="highscoresLink">View Highscores</button>
         <p>Time: <span id="timer">0</span></p>
     </div>
     <div id="container" class="container">
         <div class="heading">
             <h1 id="heading-h1">Coding Quiz Challenge</h1>
+        </div>
+        <div class="table hide">
+            <table id=" hide">
+                <thead>
+                    <th>Initials</th>
+                    <th>Score</th>
+                </thead>
+                <tbody id="highscoresTable"></tbody>
+            </table>
+            <button type="button" id="goBack" class="btn highScoreBtn">Back</button>
         </div>
         <div class="text-content">
             <p id="text-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque iste voluptatem eveniet ipsa, minima accusamus magnam dolore similique aspernatur odit repudiandae doloribus fugit dolores deleniti officia tempore distinctio totam et!</p>
