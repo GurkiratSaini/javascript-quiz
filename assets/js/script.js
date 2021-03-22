@@ -1,19 +1,19 @@
 var questions = [
-    {q:"Question 1", 
-     a: ["ans1", "ans2", "ans3", "ans4"],
-     correctAns: "ans2"},
-     {q:"Question 2", 
-     a: ["ans1", "ans2", "ans3", "ans4"],
-     correctAns: "ans3"},
-     {q:"Question 3", 
-     a: ["ans1", "ans2", "ans3", "ans4"],
-     correctAns: "ans1"},
-     {q:"Question 4", 
-     a: ["ans1", "ans2", "ans3", "ans4"],
-     correctAns: "ans4"},
-     {q:"Question 5", 
-     a: ["ans1", "ans2", "ans3", "ans4"],
-     correctAns: "ans1"}
+    {q:"Inside which element do you put the JavaScript?", 
+     a: ["<scripting>", "<script>", "<js>", "<javascript>"],
+     correctAns: "<script>"},
+     {q:"How do you write 'Hello World' in an alert box?", 
+     a: ["msgBox('Hello World'):", "alertBox('Hello World'):", "msg('Hello World'):", "alert('Hello World');"],
+     correctAns: "alert('Hello World');"},
+     {q:"How to write an IF statement in JavaScript?", 
+     a: ["if i = 5", "if(i==5)", "if i==5 then", "if i==5 then"],
+     correctAns: "if(i==5)"},
+     {q:"How to write an IF statement for checking a falsy value?", 
+     a: ["if i=!5 then", "if (i <> 5)", "if (i !=5 )", "if i <> 5"],
+     correctAns: "if (i !=5 )"},
+     {q:"How does a for loop start?", 
+     a: ["for (i = 0; i <=5; i++)", "for (i = 0; i <=5)", "for i = 1 to 5", "for (i <= 5; i++)"],
+     correctAns: "for (i = 0; i <=5; i++)"}
 ];
 var timer = 70;
 var headingEl = document.querySelector("#heading-h1");
@@ -111,68 +111,68 @@ function checkAnswer(event){
     setQuestion(questionIndex);
 }
 
-function saveScore(event) {
+function saveScore() {
     playerInitials = textField.value.toUpperCase();
     console.log(playerInitials);
     scores.push({initials: playerInitials,score: finalScore});
     console.log(scores);
     localStorage.setItem("scores", JSON.stringify(scores));
-    // displayHighScores(playerInitials);
-    displayHighScores();
+    displayHighScores(playerInitials);
+    // displayHighScores();
 }
 
-// function displayHighScores(playerInitials){
-   function displayHighScores(){
-    // nameSubmitBtn.classList.add("hide");
-    // finalScoreText.classList.add("hide");
-    // nameDisplay.classList.add("hide");
-    // textField.classList.add("hide");
+function displayHighScores(playerInitials){
+//    function displayHighScores(){
+    nameSubmitBtn.classList.add("hide");
+    finalScoreText.classList.add("hide");
+    nameDisplay.classList.add("hide");
+    textField.classList.add("hide");
     textContent.classList.add("hide");
     startQuizBtn.classList.add("hide");
     headingEl.textContent = "High Scores";
     highscoresDiv.classList.remove("hide");
-    highScoreTableGenerate();
-    // highScoreTableGenerate(playerInitials);
+    // highScoreTableGenerate();
+    highScoreTableGenerate(playerInitials);
 }
 
-// function highScoreTableGenerate(playerInitials) {
+function highScoreTableGenerate(playerInitials) {
 //    function highScoreTableGenerate() {
-//     var trEl = document.createElement("tr");
-//     var tdNameEl = document.createElement("td");
-//     var tdScoreEl = document.createElement("td");
-//     tdNameEl.textContent = playerInitials + "";
-//     tdScoreEl.textContent = finalScore + "";
-//     trEl.appendChild(tdNameEl);
-//     trEl.appendChild(tdScoreEl + "");
-//     highscoresTable.appendChild(trEl);
-// }
-
-function highScoreTableGenerate(){
-    for(let i=0; i<scores.length; i++){
-        // var trEl = document.createElement("tr");
-        // var tdNameEl = document.createElement("td");
-        // var tdScoreEl = document.createElement("td");
-        // tdNameEl.innerHTML = scores[i].initials;
-        // console.log(tdNameEl);
-        // tdScoreEl.innerHTML = scores[i].score;
-        // console.log(tdScoreEl);
-        // trEl.appendChild(tdNameEl);
-        // trEl.appendChild(tdScoreEl);
-        // highscoresTable.appendChild(trEl);
-        // console.log(highscoresTable);
-
-        var y = i++;
-        var table = 
-        row = highscoresTable.insertRow(y);
-        var cell1 = row.insertCell(i);
-        var cell2 = row.insertCell(y);
-
-        cell1.innerHTML = scores[i].initials;
-        cell2.innerHTML = scores[i].score;
-
-        console.log(`HST is ${highscoresTable}`);
-    }
+    var trEl = document.createElement("tr");
+    var tdNameEl = document.createElement("td");
+    var tdScoreEl = document.createElement("td");
+    tdNameEl.textContent = playerInitials + "";
+    tdScoreEl.textContent = finalScore + "";
+    trEl.appendChild(tdNameEl);
+    trEl.appendChild(tdScoreEl + "");
+    highscoresTable.appendChild(trEl);
 }
+
+// function highScoreTableGenerate(){
+//     for(let i=0; i<scores.length; i++){
+//         // var trEl = document.createElement("tr");
+//         // var tdNameEl = document.createElement("td");
+//         // var tdScoreEl = document.createElement("td");
+//         // tdNameEl.innerHTML = scores[i].initials;
+//         // console.log(tdNameEl);
+//         // tdScoreEl.innerHTML = scores[i].score;
+//         // console.log(tdScoreEl);
+//         // trEl.appendChild(tdNameEl);
+//         // trEl.appendChild(tdScoreEl);
+//         // highscoresTable.appendChild(trEl);
+//         // console.log(highscoresTable);
+
+//         var y = i++;
+//         var table = 
+//         row = highscoresTable.insertRow(y);
+//         var cell1 = row.insertCell(i);
+//         var cell2 = row.insertCell(y);
+
+//         cell1.innerHTML = scores[i].initials;
+//         cell2.innerHTML = scores[i].score;
+
+//         console.log(`HST is ${highscoresTable}`);
+//     }
+// }
 
 
 // starts quiz when the 'Start Quiz' Button is clicked
@@ -183,4 +183,4 @@ answerGroup.forEach(element => {
 });
 
 nameSubmitBtn.addEventListener("click", saveScore);
-highscoresLink.addEventListener("click", displayHighScores);
+// highscoresLink.addEventListener("click", displayHighScores);
